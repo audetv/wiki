@@ -1,0 +1,12 @@
+$audetv_wiki $mol_page
+	title \My Wiki
+	Store $mol_state_shared
+	Note!id $audetv_wiki_note
+	- поместим внутрь нашей страницы какой-нибудь компонент
+	body /
+		<= Details $mol_textarea
+			hint \What do you think?
+			- если указать значение поумолчаню, пустая строка \ 
+			- то свойство будет созано автоматически,
+			- иначе его необходимо объявить в своем view.ts файле логики
+			value?next <=> details?next \
