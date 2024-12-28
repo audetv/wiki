@@ -6,7 +6,7 @@ $audetv_wiki $mol_book2
 		<= Theme $mol_theme_auto
 	pages /
 		<= View_page $mol_page
-			title \ ВИКИ
+			title \ВИКИ
 			tools /
 				<= Lights $mol_lights_toggle
 				<= Source $mol_link_source
