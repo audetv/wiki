@@ -6,7 +6,12 @@ $audetv_wiki $mol_book2
 		<= Theme $mol_theme_auto
 	pages /
 		<= View_page $mol_page
-			title \ВИКИ
+			title_content /
+				<= Logo $mol_image
+					uri \/audetv/wiki/logo/logo.svg
+					natural_width 24
+					natural_height 24
+				<= title \Вики
 			tools /
 				<= Lights $mol_lights_toggle
 				<= Source $mol_link_source
