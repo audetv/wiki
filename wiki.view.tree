@@ -1,12 +1,55 @@
-$audetv_wiki $mol_page
-	title \My Wiki
-	Store $mol_state_shared
-	Note!id $audetv_wiki_note
-	- поместим внутрь нашей страницы какой-нибудь компонент
-	body /
-		<= Details $mol_textarea
-			hint \What do you think?
-			- если указать значение поумолчаню, пустая строка \ 
-			- то свойство будет созано автоматически,
-			- иначе его необходимо объявить в своем view.ts файле логики
-			value?next <=> details?next \
+$audetv_wiki $mol_book2
+	note* $audetv_wiki_note
+	note_current $audetv_wiki_note
+	Placeholder null
+	plugins /
+		<= Theme $mol_theme_auto
+	pages /
+		<= View_page $mol_page
+			title \ ВИКИ
+			tools /
+				<= Lights $mol_lights_toggle
+				<= Source $mol_link_source
+					uri \https://github.com/audetv/wiki			
+				<= Add $mol_button_minor
+					hint \Добавить новую страницу
+					click? <=> add? null
+					sub /
+						<= Add_icon $mol_icon_plus
+				<= Edit_toggle $mol_check_icon
+					hint \Редактировать страницу
+					checked? <=> editing? false
+					Icon <= Edit_icon $mol_icon_pencil
+				<= Profile $mol_link
+					hint \Профиль
+					arg <= profile_arg *
+					sub /
+						<= Profile_icon $mol_icon_account
+				<= Crus_status $hyoo_crus_status
+			body /
+				<= Content $mol_list
+					rows /
+						<= Body $mol_text
+							text <= note_body \
+						<= Note_changed_moment $mol_date
+							value_moment <= note_changed_moment $mol_time_moment
+							enabled true
+							
+		<= Edit_page $mol_page
+			head /
+				<= Title $mol_string
+					hint \Заголовок
+					value? <=> note_title? \
+					enabled <= editing
+					selection? <=> title_selection? /
+				<= Edit_close $mol_button_minor
+					hint \Закрыть редактор
+					click? <=> edit_close? null
+					sub / <= Edit_close_icon $mol_icon_close
+			body /
+				<= Body_edit $mol_textarea
+					hint \Содержание страницы
+					value? <=> note_body? \
+					enabled <= editing
+					selection? <=> note_body_selection? /number
+		<= Profile_page $mol_page
