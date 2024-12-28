@@ -1,0 +1,13 @@
+:root,[mol_theme="$mol_theme_dark"], :where([mol_theme="$mol_theme_dark"]) [mol_theme] {
+	--mol_theme_back: #1c1c1e;
+	--mol_theme_card: #19181c;
+
+	--mol_theme_text: #bfc3c3;
+}
+
+[mol_theme="$mol_theme_light"], :where([mol_theme="$mol_theme_light"]) [mol_theme] {
+	--mol_theme_back: #f9f8f6;
+	--mol_theme_card: #f3f1ed;
+
+	--mol_theme_text: #212529;
+}
