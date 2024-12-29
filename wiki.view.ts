@@ -62,11 +62,20 @@ namespace $.$$ {
 			this.editing( false )
 		}
 
+		safe( next?: boolean ) {
+			return this.$.$mol_state_history.value( 'safe', next ) ?? true
+		}
+
+		safe_close() {
+			return this.safe( false )
+		}
+
 		@$mol_mem
 		pages() {
 			return [
 				this.View_page(),
-				... this.editing() ? [ this.Edit_page() ] : []
+				... this.editing() ? [ this.Edit_page() ] : [],
+				... this.safe() ? [ this.Safe_page() ] : [],
 			]
 		}
 	}

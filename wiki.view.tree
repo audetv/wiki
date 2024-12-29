@@ -31,6 +31,10 @@ $audetv_wiki $mol_book2
 					sub /
 						<= Profile_icon $mol_icon_account
 				<= Crus_status $hyoo_crus_status
+				<= Safe_toggle $mol_check_icon
+					hint \Сохранить личные ключи
+					checked? <=> safe? false
+					Icon <= Safe_icon $mol_icon_key_variant
 			body /
 				<= Content $mol_list
 					rows /
@@ -39,7 +43,12 @@ $audetv_wiki $mol_book2
 						<= Note_changed_moment $mol_date
 							value_moment <= note_changed_moment $mol_time_moment
 							enabled true
-							
+		<= Safe_page $hyoo_meta_safe
+			tools /
+				<= Safe_close $mol_button_minor
+					click? <=> safe_close? null
+					sub /
+						<= Close_icon $mol_icon_close
 		<= Edit_page $mol_page
 			head /
 				<= Title $mol_string
