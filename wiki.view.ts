@@ -1,9 +1,15 @@
 namespace $.$$ {
 	export class $audetv_wiki extends $.$audetv_wiki {
 
+		// Whole database
+		@$mol_mem
+		glob() {
+			return this.$.$hyoo_crus_glob
+		}
+
 		@$mol_mem_key
 		note( ref: $hyoo_crus_ref ) {
-			return this.$.$hyoo_crus_glob.Node( ref, $audetv_wiki_note )
+			return this.glob().Node( ref, $audetv_wiki_note )
 		}
 
 		note_current() {
@@ -32,7 +38,7 @@ namespace $.$$ {
 		@$mol_mem
 		add() {
 
-			const land = this.$.$hyoo_crus_glob.land_grab( $hyoo_crus_rank_orgy )
+			const land = this.glob().land_grab( $hyoo_crus_rank_orgy )
 
 			this.$.$mol_dom_context.location.href = '#!=' + land.ref().description
 			this.editing( true )
@@ -41,7 +47,7 @@ namespace $.$$ {
 		@$mol_mem
 		profile_arg() {
 			return {
-				'': this.$.$hyoo_crus_glob.home().hall_by(
+				'': this.glob().home().hall_by(
 					$audetv_wiki_note, $hyoo_crus_rank_public
 				)!.ref().description
 			}
