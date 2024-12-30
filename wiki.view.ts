@@ -73,11 +73,35 @@ namespace $.$$ {
 		}
 
 		@$mol_mem
+		person() {
+			return this.$.$hyoo_crus_glob.home( $audetv_wiki_person )
+		}
+
+		@$mol_mem
+		person_id() {
+			return this.person().ref().description!
+		}
+
+		@$mol_mem
+		profile() {
+
+			// const realm = this.realm().home().hall_by( $audetv_wiki_person, {} )
+			// console.log( realm )
+			const id = this.$.$mol_state_arg.value( 'profile' )
+			if ( !id ) return null!
+
+			const ref = $hyoo_crus_ref( id )
+			return this.$.$hyoo_crus_glob.Node( ref, $audetv_wiki_person )
+		}
+
+		@$mol_mem
 		pages() {
 			return [
 				this.View_page(),
 				... this.editing() ? [ this.Edit_page() ] : [],
 				... this.safe() ? [ this.Safe_page() ] : [],
+				// ... super.pages(),
+				// ... this.profile() ? [ this.Profile_page( this.profile() ) ] :  []
 			]
 		}
 	}

@@ -1,0 +1,22 @@
+$audetv_wiki_person_page $mol_page
+	person $audetv_wiki_person
+		title? => title?
+	Title $mol_string_button
+		hint \Имя
+		value? <=> title?
+	tools /
+		<= Close $mol_link
+			hint \Закрыть
+			arg <= close_arg
+			sub /
+				<= Close_icon $mol_icon_close
+	body /
+		<= Id_block $mol_form_field
+			name \Id
+			Content <= Id $mol_chip
+				title <= id \
+		<= Key_block $mol_form_field
+			name \Публичный ключ
+			Content <= Key $mol_text_code
+				sidebar_showed true
+				text <= key \
