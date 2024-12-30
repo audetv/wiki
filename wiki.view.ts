@@ -62,8 +62,10 @@ namespace $.$$ {
 			this.editing( false )
 		}
 
+		@$mol_mem
 		safe( next?: boolean ) {
-			return this.$.$mol_state_history.value( 'safe', next ) ?? true
+			const arg = next == undefined ? undefined : next ? '' : null
+			return this.$.$mol_state_arg.value( 'svodd_meta_key', arg) !== null
 		}
 
 		safe_close() {
