@@ -1,4 +1,4 @@
-$audetv_wiki $mol_book2
+$audetv_wiki $mol_book2_catalog
 	note* $audetv_wiki_note
 	note_current $audetv_wiki_note
 	Placeholder null
@@ -30,6 +30,11 @@ $audetv_wiki $mol_book2
 					arg <= profile_arg *
 					sub /
 						<= Profile_icon $mol_icon_account
+				- <= Profile_link $mol_link
+					hint \Профиль
+					arg *
+						profile <= person_id \
+						note null
 				<= Crus_status $hyoo_crus_status
 				<= Safe_toggle $mol_check_icon
 					hint \Сохранить личные ключи
@@ -43,7 +48,7 @@ $audetv_wiki $mol_book2
 						<= Note_changed_moment $mol_date
 							value_moment <= note_changed_moment $mol_time_moment
 							enabled true
-		<= Safe_page $hyoo_meta_safe
+		<= Safe_page $audetv_wiki_meta_safe
 			tools /
 				<= Safe_close $mol_button_minor
 					click? <=> safe_close? null
@@ -66,4 +71,7 @@ $audetv_wiki $mol_book2
 					value? <=> note_body? \
 					enabled <= editing
 					selection? <=> note_body_selection? /number
-		<= Profile_page $mol_page
+		- <= Profile_page* $audetv_wiki_person_page
+			close_arg *
+				profile null
+			person <= profile* $audetv_wiki_person
