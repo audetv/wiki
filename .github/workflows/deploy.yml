@@ -1,4 +1,7 @@
-name: Deploy
+name: $audetv_wiki
+
+# https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs#defining-access-for-the-github_token-permissions
+permissions: write-all
 
 on:
   workflow_dispatch:
@@ -16,8 +19,8 @@ jobs:
 
     - uses: hyoo-ru/mam_build@master2
       with:
-        token: ${{ secrets.GH_PAT }}
         package: 'audetv/wiki'
+
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/main'
       with:
