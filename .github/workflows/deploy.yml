@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-  schedule:
-  - cron: "0 7 * * *"
+  # schedule:
+  # - cron: "0 7 * * *"
 
 jobs:
   build:
