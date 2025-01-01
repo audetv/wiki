@@ -5,7 +5,15 @@ namespace $.$$ {
 		}
 
 		override key() {
+
+			// console.log( this.$.$hyoo_crus_auth.current().toString() )
+			// console.log( this.$.$hyoo_crus_glob.home().Hall()?.land().key()?.toString() )
+
 			return this.person().land().key()?.toString() ?? ''
+		}
+
+		person_body( next?: string ) {
+			return this.person().Body( next )?.value( next ) ?? ''
 		}
 	}
 }

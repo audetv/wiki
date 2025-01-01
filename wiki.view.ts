@@ -55,7 +55,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		editing( next?: boolean ) {
-			return this.$.$mol_state_history.value( 'edit', next ) ?? true
+			return this.$.$mol_state_history.value( 'edit', next ) ?? false
 		}
 
 		edit_close() {
@@ -65,7 +65,7 @@ namespace $.$$ {
 		@$mol_mem
 		safe( next?: boolean ) {
 			const arg = next == undefined ? undefined : next ? '' : null
-			return this.$.$mol_state_arg.value( 'svodd_meta_key', arg) !== null
+			return this.$.$mol_state_arg.value( 'wiki_meta_key', arg) !== null
 		}
 
 		safe_close() {
@@ -87,11 +87,17 @@ namespace $.$$ {
 
 			// const realm = this.realm().home().hall_by( $audetv_wiki_person, {} )
 			// console.log( realm )
-			const id = this.$.$mol_state_arg.value( 'profile' )
+			// const id = this.$.$mol_state_arg.value( 'profile' )
+			const id = this.person().ref().description!
 			if ( !id ) return null!
 
 			const ref = $hyoo_crus_ref( id )
 			return this.$.$hyoo_crus_glob.Node( ref, $audetv_wiki_person )
+		}
+
+		@ $mol_mem
+		click_profile( next?: boolean ) {
+			return this.$.$mol_state_history.value( 'edit_profile', next ) ?? false
 		}
 
 		@$mol_mem
@@ -101,7 +107,8 @@ namespace $.$$ {
 				... this.editing() ? [ this.Edit_page() ] : [],
 				... this.safe() ? [ this.Safe_page() ] : [],
 				// ... super.pages(),
-				// ... this.profile() ? [ this.Profile_page( this.profile() ) ] :  []
+				... this.click_profile() ? [ this.Profile_page( this.profile() ) ] :  [],
+				// ... this.click_profile() ? [this.Profile_page( this.click_profile() )] : []
 			]
 		}
 	}

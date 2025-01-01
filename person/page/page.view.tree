@@ -7,7 +7,7 @@ $audetv_wiki_person_page $mol_page
 	tools /
 		<= Close $mol_link
 			hint \Закрыть
-			arg <= close_arg
+			arg <= close_arg *
 			sub /
 				<= Close_icon $mol_icon_close
 	body /
@@ -20,3 +20,6 @@ $audetv_wiki_person_page $mol_page
 			Content <= Key $mol_text_code
 				sidebar_showed true
 				text <= key \
+		<= Body_edit $mol_textarea
+			hint \Описание
+			value? <=> person_body? \
