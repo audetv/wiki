@@ -3881,7 +3881,7 @@ declare namespace $ {
             gift: (unit: $hyoo_crus_gift) => Res;
             sand: (unit: $hyoo_crus_sand) => Res;
         }): Res;
-        narrow(): $hyoo_crus_sand | $hyoo_crus_gift | $hyoo_crus_pass;
+        narrow(): $hyoo_crus_pass | $hyoo_crus_sand | $hyoo_crus_gift;
         key(): string;
         id6(offset: number, next?: string): string;
         id12(offset: number, next?: $hyoo_crus_ref): symbol & {
@@ -5973,7 +5973,7 @@ declare namespace $ {
         static rock(hash: Uint8Array<ArrayBuffer>, next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer> | null;
         static rock_load(hash: Uint8Array<ArrayBuffer>): Promise<Uint8Array<ArrayBuffer> | null>;
         static units_save(land: $hyoo_crus_ref, units: readonly $hyoo_crus_unit[]): Promise<void>;
-        static units_load(land: $hyoo_crus_ref): Promise<($hyoo_crus_sand | $hyoo_crus_gift | $hyoo_crus_pass)[]>;
+        static units_load(land: $hyoo_crus_ref): Promise<($hyoo_crus_pass | $hyoo_crus_sand | $hyoo_crus_gift)[]>;
         static db_sync(): import("pg").Pool | null;
         static db(): Promise<import("pg").Pool | null>;
     }
@@ -8786,9 +8786,11 @@ declare namespace $ {
 //# sourceMappingURL=safe.view.tree.d.ts.map
 declare namespace $.$$ {
     class $audetv_wiki_meta_safe extends $hyoo_meta_safe {
+        key_import(next?: string | null): string | null;
         key_new(): string | null;
         import_switch(): void;
         key_export(): string;
+        export_link(): string;
     }
 }
 
@@ -8973,6 +8975,21 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    const $audetv_wiki_person_base: Omit<typeof $hyoo_crus_home, "prototype"> & (new (...args: any[]) => $mol_type_override<$hyoo_crus_home, {
+        readonly Body: (auto?: any) => $hyoo_crus_text | null;
+    }>) & {
+        schema: {
+            [x: string]: typeof $hyoo_crus_node;
+        } & {
+            readonly Body: typeof $hyoo_crus_text;
+        };
+    };
+    export class $audetv_wiki_person extends $audetv_wiki_person_base {
+    }
+    export {};
+}
+
+declare namespace $ {
     const $audetv_wiki_note_base: Omit<typeof $hyoo_crus_entity, "prototype"> & (new (...args: any[]) => $mol_type_override<$hyoo_crus_entity, {
         readonly Body: (auto?: any) => $hyoo_crus_text | null;
     }>) & {
@@ -8986,6 +9003,139 @@ declare namespace $ {
         body_selection(next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number] | undefined;
     }
     export {};
+}
+
+declare namespace $ {
+
+	export class $mol_chip extends $mol_view {
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chip.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_string_button extends $mol_string {
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $ {
+
+	type __audetv_wiki_person_page_1 = $mol_type_enforce<
+		Parameters< $audetv_wiki_person_page['title'] >[0]
+		,
+		Parameters< ReturnType< $audetv_wiki_person_page['person'] >['title'] >[0]
+	>
+	type $mol_link__hint_audetv_wiki_person_page_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__arg_audetv_wiki_person_page_3 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['close_arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__sub_audetv_wiki_person_page_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_chip__title_audetv_wiki_person_page_5 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['id'] >
+		,
+		ReturnType< $mol_chip['title'] >
+	>
+	type $mol_form_field__name_audetv_wiki_person_page_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__Content_audetv_wiki_person_page_7 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['Id'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_text_code__sidebar_showed_audetv_wiki_person_page_8 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_text_code['sidebar_showed'] >
+	>
+	type $mol_text_code__text_audetv_wiki_person_page_9 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['key'] >
+		,
+		ReturnType< $mol_text_code['text'] >
+	>
+	type $mol_form_field__name_audetv_wiki_person_page_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__Content_audetv_wiki_person_page_11 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['Key'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_textarea__hint_audetv_wiki_person_page_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_textarea['hint'] >
+	>
+	type $mol_textarea__value_audetv_wiki_person_page_13 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['person_body'] >
+		,
+		ReturnType< $mol_textarea['value'] >
+	>
+	type $mol_string_button__hint_audetv_wiki_person_page_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string_button['hint'] >
+	>
+	type $mol_string_button__value_audetv_wiki_person_page_15 = $mol_type_enforce<
+		ReturnType< $audetv_wiki_person_page['title'] >
+		,
+		ReturnType< $mol_string_button['value'] >
+	>
+	export class $audetv_wiki_person_page extends $mol_page {
+		title( next?: ReturnType< ReturnType< $audetv_wiki_person_page['person'] >['title'] > ): ReturnType< ReturnType< $audetv_wiki_person_page['person'] >['title'] >
+		close_arg( ): Record<string, any>
+		Close_icon( ): $mol_icon_close
+		Close( ): $mol_link
+		id( ): string
+		Id( ): $mol_chip
+		Id_block( ): $mol_form_field
+		key( ): string
+		Key( ): $mol_text_code
+		Key_block( ): $mol_form_field
+		person_body( next?: string ): string
+		Body_edit( ): $mol_textarea
+		person( ): $audetv_wiki_person
+		Title( ): $mol_string_button
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=page.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $audetv_wiki_person_page extends $.$audetv_wiki_person_page {
+        id(): string;
+        key(): string;
+        person_body(next?: string): string;
+    }
+}
+
+declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -9029,17 +9179,6 @@ declare namespace $ {
         prefix(): string;
         value(key: string, next?: Value): Value | null;
     }
-}
-
-declare namespace $ {
-    const $audetv_wiki_person_base: Omit<typeof $hyoo_crus_home, "prototype"> & (new (...args: any[]) => $mol_type_override<$hyoo_crus_home, {}>) & {
-        schema: {
-            [x: string]: typeof $hyoo_crus_node;
-        };
-    };
-    export class $audetv_wiki_person extends $audetv_wiki_person_base {
-    }
-    export {};
 }
 
 declare namespace $ {
@@ -9104,20 +9243,20 @@ declare namespace $ {
 		,
 		ReturnType< $mol_check_icon['Icon'] >
 	>
-	type $mol_link__hint_audetv_wiki_11 = $mol_type_enforce<
+	type $mol_check_icon__hint_audetv_wiki_11 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_link['hint'] >
+		ReturnType< $mol_check_icon['hint'] >
 	>
-	type $mol_link__arg_audetv_wiki_12 = $mol_type_enforce<
-		ReturnType< $audetv_wiki['profile_arg'] >
+	type $mol_check_icon__checked_audetv_wiki_12 = $mol_type_enforce<
+		ReturnType< $audetv_wiki['click_profile'] >
 		,
-		ReturnType< $mol_link['arg'] >
+		ReturnType< $mol_check_icon['checked'] >
 	>
-	type $mol_link__sub_audetv_wiki_13 = $mol_type_enforce<
+	type $mol_check_icon__sub_audetv_wiki_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_link['sub'] >
+		ReturnType< $mol_check_icon['sub'] >
 	>
 	type $mol_check_icon__hint_audetv_wiki_14 = $mol_type_enforce<
 		string
@@ -9249,6 +9388,18 @@ declare namespace $ {
 		,
 		ReturnType< $mol_page['body'] >
 	>
+	type $audetv_wiki_person_page__close_arg_audetv_wiki_40 = $mol_type_enforce<
+		({ 
+			'profile': any,
+		}) 
+		,
+		ReturnType< $audetv_wiki_person_page['close_arg'] >
+	>
+	type $audetv_wiki_person_page__person_audetv_wiki_41 = $mol_type_enforce<
+		ReturnType< $audetv_wiki['profile'] >
+		,
+		ReturnType< $audetv_wiki_person_page['person'] >
+	>
 	export class $audetv_wiki extends $mol_book2_catalog {
 		Theme( ): $mol_theme_auto
 		Logo( ): $mol_image
@@ -9261,9 +9412,9 @@ declare namespace $ {
 		editing( next?: boolean ): boolean
 		Edit_icon( ): $mol_icon_pencil
 		Edit_toggle( ): $mol_check_icon
-		profile_arg( ): Record<string, any>
+		click_profile( next?: boolean ): boolean
 		Profile_icon( ): $mol_icon_account
-		Profile( ): $mol_link
+		Profile_toggle( ): $mol_check_icon
 		Crus_status( ): $hyoo_crus_status
 		safe( next?: boolean ): boolean
 		Safe_icon( ): $mol_icon_key_variant
@@ -9287,11 +9438,13 @@ declare namespace $ {
 		note_body_selection( next?: readonly(number)[] ): readonly(number)[]
 		Body_edit( ): $mol_textarea
 		Edit_page( ): $mol_page
+		profile( id: any): $audetv_wiki_person
 		note( id: any): $audetv_wiki_note
 		note_current( ): $audetv_wiki_note
 		Placeholder( ): any
 		plugins( ): readonly(any)[]
 		pages( ): readonly(any)[]
+		Profile_page( id: any): $audetv_wiki_person_page
 	}
 	
 }
@@ -9317,7 +9470,8 @@ declare namespace $.$$ {
         person(): $audetv_wiki_person;
         person_id(): string;
         profile(): $audetv_wiki_person;
-        pages(): ($mol_page | $.$audetv_wiki_meta_safe)[];
+        click_profile(next?: boolean): any;
+        pages(): ($mol_page | $.$audetv_wiki_meta_safe | $.$audetv_wiki_person_page)[];
     }
 }
 

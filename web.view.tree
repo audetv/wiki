@@ -1079,6 +1079,38 @@ $mol_textarea_edit $mol_string
 		^
 		scrollTop 0
 
+$mol_chip $mol_view
+	sub /
+		<= title
+
+$mol_string_button $mol_string
+
+$audetv_wiki_person_page $mol_page
+	person $audetv_wiki_person
+		title? => title?
+	Title $mol_string_button
+		hint \Имя
+		value? <=> title?
+	tools /
+		<= Close $mol_link
+			hint \Закрыть
+			arg <= close_arg *
+			sub /
+				<= Close_icon $mol_icon_close
+	body /
+		<= Id_block $mol_form_field
+			name \Id
+			Content <= Id $mol_chip
+				title <= id \
+		<= Key_block $mol_form_field
+			name \Публичный ключ
+			Content <= Key $mol_text_code
+				sidebar_showed true
+				text <= key \
+		<= Body_edit $mol_textarea
+			hint \Описание
+			value? <=> person_body? \
+
 $mol_text_list $mol_text
 	auto_scroll null
 	attr *
@@ -1120,16 +1152,20 @@ $audetv_wiki $mol_book2_catalog
 					hint \Редактировать страницу
 					checked? <=> editing? false
 					Icon <= Edit_icon $mol_icon_pencil
-				<= Profile $mol_link
+				- <= Profile $mol_link
 					hint \Профиль
 					arg <= profile_arg *
 					sub /
 						<= Profile_icon $mol_icon_account
-				- <= Profile_link $mol_link
+				<= Profile_toggle $mol_check_icon
 					hint \Профиль
-					arg *
-						profile <= person_id \
-						note null
+					checked? <=> click_profile? false
+					- arg *
+						profile <= click_profile? null
+						- profile <= person_id \
+						- profile null
+					sub /
+						<= Profile_icon $mol_icon_account
 				<= Crus_status $hyoo_crus_status
 				<= Safe_toggle $mol_check_icon
 					hint \Сохранить личные ключи
@@ -1166,7 +1202,7 @@ $audetv_wiki $mol_book2_catalog
 					value? <=> note_body? \
 					enabled <= editing
 					selection? <=> note_body_selection? /number
-		- <= Profile_page* $audetv_wiki_person_page
-			close_arg *
-				profile null
-			person <= profile* $audetv_wiki_person
+	Profile_page* $audetv_wiki_person_page
+		close_arg *
+			profile null
+		person <= profile* $audetv_wiki_person

@@ -3206,6 +3206,9 @@ var $;
             const win = this.$.$mol_dom_context;
             if (win.parent !== win.self && !win.document.hasFocus())
                 return;
+            new this.$.$mol_after_timeout(0, () => {
+                this.focused(true);
+            });
         }
         destructor() {
             const node = $mol_wire_probe(() => this.dom_node());
@@ -3711,7 +3714,6 @@ var $;
                             left: p.offsetLeft + p.offsetWidth - b.offsetWidth,
                             behavior: 'smooth',
                         });
-                        new this.$.$mol_after_timeout(1000, () => n.bring());
                     });
                     break;
                 }
@@ -7056,7 +7058,6 @@ var $;
             maxHeight: per(100),
             boxSizing: 'border-box',
             color: $mol_theme.text,
-            backdropFilter: blur(`3px`),
             ':focus': {
                 outline: 'none',
             },
@@ -11861,6 +11862,8 @@ var $;
             const head = sand.head();
             const units = this.sand_ordered({ head, peer }).filter(unit => unit.tip() !== 'nil');
             const seat = units.indexOf(sand);
+            if (seat < 0)
+                return sand;
             return this.post(seat ? units[seat - 1].self() : '', head, sand.self(), null, 'term');
         }
         broadcast() {
@@ -19712,6 +19715,9 @@ var $;
     var $$;
     (function ($$) {
         class $audetv_wiki_meta_safe extends $hyoo_meta_safe {
+            key_import(next) {
+                return this.$.$mol_state_arg.value('wiki_meta_key', next) ?? null;
+            }
             key_new() {
                 const serial = this.key_import();
                 if (!serial)
@@ -19734,20 +19740,27 @@ var $;
                 const key_new = this.key_new();
                 this.password('');
                 this.key_import(null);
+                this.$.$mol_wait_rest();
                 this.$.$mol_state_local.value('$hyoo_crus_auth', key_new);
+                this.$.$hyoo_crus_glob.yard().master();
             }
             key_export() {
                 const pass = this.password();
                 const recall = $mol_charset_encode(this.recall());
                 const salt = $mol_crypto_hash(recall).slice(0, 16);
                 const secret = $mol_wire_sync(this.$.$mol_crypto_secret).pass(pass, salt);
-                const key = this.$.$mol_state_local.value('$hyoo_crus_auth');
+                const key = this.$.$hyoo_crus_auth.current().toString();
                 const open = this.$.$mol_charset_encode(key);
                 const closed = new Uint8Array($mol_wire_sync(secret).encrypt(open, salt));
                 const pack = new Uint8Array(this.key_size() + recall.byteLength);
                 pack.set(closed, 0);
                 pack.set(recall, this.key_size());
                 return this.$.$mol_base64_encode(pack);
+            }
+            export_link() {
+                return this.$.$mol_state_arg.link({
+                    wiki_meta_key: this.key_export(),
+                });
             }
         }
         __decorate([
@@ -19759,6 +19772,9 @@ var $;
         __decorate([
             $mol_mem
         ], $audetv_wiki_meta_safe.prototype, "key_export", null);
+        __decorate([
+            $mol_mem
+        ], $audetv_wiki_meta_safe.prototype, "export_link", null);
         $$.$audetv_wiki_meta_safe = $audetv_wiki_meta_safe;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -20267,6 +20283,17 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $audetv_wiki_person extends $hyoo_crus_home.with({
+        Body: $hyoo_crus_text
+    }) {
+    }
+    $.$audetv_wiki_person = $audetv_wiki_person;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $audetv_wiki_note extends $hyoo_crus_entity.with({
         Body: $hyoo_crus_text,
     }) {
@@ -20275,6 +20302,184 @@ var $;
         }
     }
     $.$audetv_wiki_note = $audetv_wiki_note;
+})($ || ($ = {}));
+
+;
+	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_chip, {
+            padding: $mol_gap.text,
+            border: {
+                radius: $mol_gap.round,
+            },
+            background: {
+                color: $mol_theme.card,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_string_button) = class $mol_string_button extends ($.$mol_string) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/string/button/button.view.css", "[mol_string_button]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$audetv_wiki_person_page) = class $audetv_wiki_person_page extends ($.$mol_page) {
+		title(next){
+			return (this.person().title(next));
+		}
+		close_arg(){
+			return {};
+		}
+		Close_icon(){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		Close(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Закрыть");
+			(obj.arg) = () => ((this.close_arg()));
+			(obj.sub) = () => ([(this.Close_icon())]);
+			return obj;
+		}
+		id(){
+			return "";
+		}
+		Id(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ((this.id()));
+			return obj;
+		}
+		Id_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Id");
+			(obj.Content) = () => ((this.Id()));
+			return obj;
+		}
+		key(){
+			return "";
+		}
+		Key(){
+			const obj = new this.$.$mol_text_code();
+			(obj.sidebar_showed) = () => (true);
+			(obj.text) = () => ((this.key()));
+			return obj;
+		}
+		Key_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Публичный ключ");
+			(obj.Content) = () => ((this.Key()));
+			return obj;
+		}
+		person_body(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Body_edit(){
+			const obj = new this.$.$mol_textarea();
+			(obj.hint) = () => ("Описание");
+			(obj.value) = (next) => ((this.person_body(next)));
+			return obj;
+		}
+		person(){
+			const obj = new this.$.$audetv_wiki_person();
+			return obj;
+		}
+		Title(){
+			const obj = new this.$.$mol_string_button();
+			(obj.hint) = () => ("Имя");
+			(obj.value) = (next) => ((this.title(next)));
+			return obj;
+		}
+		tools(){
+			return [(this.Close())];
+		}
+		body(){
+			return [
+				(this.Id_block()), 
+				(this.Key_block()), 
+				(this.Body_edit())
+			];
+		}
+	};
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Close_icon"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Close"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Id"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Id_block"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Key"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Key_block"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "person_body"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Body_edit"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "person"));
+	($mol_mem(($.$audetv_wiki_person_page.prototype), "Title"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $audetv_wiki_person_page extends $.$audetv_wiki_person_page {
+            id() {
+                return this.person().ref().description;
+            }
+            key() {
+                return this.person().land().key()?.toString() ?? '';
+            }
+            person_body(next) {
+                return this.person().Body(next)?.value(next) ?? '';
+            }
+        }
+        $$.$audetv_wiki_person_page = $audetv_wiki_person_page;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($audetv_wiki_person_page, {
+            flex: {
+                basis: `20rem`,
+            },
+            margin: {
+                left: 'auto',
+            },
+            Key: {
+                wordBreak: 'break-all',
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -20371,17 +20576,18 @@ var $;
 			(obj.Icon) = () => ((this.Edit_icon()));
 			return obj;
 		}
-		profile_arg(){
-			return {};
+		click_profile(next){
+			if(next !== undefined) return next;
+			return false;
 		}
 		Profile_icon(){
 			const obj = new this.$.$mol_icon_account();
 			return obj;
 		}
-		Profile(){
-			const obj = new this.$.$mol_link();
+		Profile_toggle(){
+			const obj = new this.$.$mol_check_icon();
 			(obj.hint) = () => ("Профиль");
-			(obj.arg) = () => ((this.profile_arg()));
+			(obj.checked) = (next) => ((this.click_profile(next)));
 			(obj.sub) = () => ([(this.Profile_icon())]);
 			return obj;
 		}
@@ -20436,7 +20642,7 @@ var $;
 				(this.Source()), 
 				(this.Add()), 
 				(this.Edit_toggle()), 
-				(this.Profile()), 
+				(this.Profile_toggle()), 
 				(this.Crus_status()), 
 				(this.Safe_toggle())
 			]);
@@ -20511,6 +20717,10 @@ var $;
 			(obj.body) = () => ([(this.Body_edit())]);
 			return obj;
 		}
+		profile(id){
+			const obj = new this.$.$audetv_wiki_person();
+			return obj;
+		}
 		note(id){
 			const obj = new this.$.$audetv_wiki_note();
 			return obj;
@@ -20532,6 +20742,12 @@ var $;
 				(this.Edit_page())
 			];
 		}
+		Profile_page(id){
+			const obj = new this.$.$audetv_wiki_person_page();
+			(obj.close_arg) = () => ({"profile": null});
+			(obj.person) = () => ((this.profile(id)));
+			return obj;
+		}
 	};
 	($mol_mem(($.$audetv_wiki.prototype), "Theme"));
 	($mol_mem(($.$audetv_wiki.prototype), "Logo"));
@@ -20543,8 +20759,9 @@ var $;
 	($mol_mem(($.$audetv_wiki.prototype), "editing"));
 	($mol_mem(($.$audetv_wiki.prototype), "Edit_icon"));
 	($mol_mem(($.$audetv_wiki.prototype), "Edit_toggle"));
+	($mol_mem(($.$audetv_wiki.prototype), "click_profile"));
 	($mol_mem(($.$audetv_wiki.prototype), "Profile_icon"));
-	($mol_mem(($.$audetv_wiki.prototype), "Profile"));
+	($mol_mem(($.$audetv_wiki.prototype), "Profile_toggle"));
 	($mol_mem(($.$audetv_wiki.prototype), "Crus_status"));
 	($mol_mem(($.$audetv_wiki.prototype), "safe"));
 	($mol_mem(($.$audetv_wiki.prototype), "Safe_icon"));
@@ -20568,8 +20785,10 @@ var $;
 	($mol_mem(($.$audetv_wiki.prototype), "note_body_selection"));
 	($mol_mem(($.$audetv_wiki.prototype), "Body_edit"));
 	($mol_mem(($.$audetv_wiki.prototype), "Edit_page"));
+	($mol_mem_key(($.$audetv_wiki.prototype), "profile"));
 	($mol_mem_key(($.$audetv_wiki.prototype), "note"));
 	($mol_mem(($.$audetv_wiki.prototype), "note_current"));
+	($mol_mem_key(($.$audetv_wiki.prototype), "Profile_page"));
 
 
 ;
@@ -20604,15 +20823,6 @@ var $;
         $mol_mem_key
     ], $mol_state_history, "value", null);
     $.$mol_state_history = $mol_state_history;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $audetv_wiki_person extends $hyoo_crus_home.with({}) {
-    }
-    $.$audetv_wiki_person = $audetv_wiki_person;
 })($ || ($ = {}));
 
 ;
@@ -20688,14 +20898,14 @@ var $;
                 };
             }
             editing(next) {
-                return this.$.$mol_state_history.value('edit', next) ?? true;
+                return this.$.$mol_state_history.value('edit', next) ?? false;
             }
             edit_close() {
                 this.editing(false);
             }
             safe(next) {
                 const arg = next == undefined ? undefined : next ? '' : null;
-                return this.$.$mol_state_arg.value('svodd_meta_key', arg) !== null;
+                return this.$.$mol_state_arg.value('wiki_meta_key', arg) !== null;
             }
             safe_close() {
                 return this.safe(false);
@@ -20707,17 +20917,21 @@ var $;
                 return this.person().ref().description;
             }
             profile() {
-                const id = this.$.$mol_state_arg.value('profile');
+                const id = this.person().ref().description;
                 if (!id)
                     return null;
                 const ref = $hyoo_crus_ref(id);
                 return this.$.$hyoo_crus_glob.Node(ref, $audetv_wiki_person);
+            }
+            click_profile(next) {
+                return this.$.$mol_state_history.value('edit_profile', next) ?? false;
             }
             pages() {
                 return [
                     this.View_page(),
                     ...this.editing() ? [this.Edit_page()] : [],
                     ...this.safe() ? [this.Safe_page()] : [],
+                    ...this.click_profile() ? [this.Profile_page(this.profile())] : [],
                 ];
             }
         }
@@ -20748,6 +20962,9 @@ var $;
         __decorate([
             $mol_mem
         ], $audetv_wiki.prototype, "profile", null);
+        __decorate([
+            $mol_mem
+        ], $audetv_wiki.prototype, "click_profile", null);
         __decorate([
             $mol_mem
         ], $audetv_wiki.prototype, "pages", null);
